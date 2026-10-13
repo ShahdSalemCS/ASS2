@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description"
+          content="Contact My First Web using the contact form.">
+    <title>Contact</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">
+        Skip to main content
+    </a>
+
+    <header class="site-header">
+        <h1 id="site-title"> Let's Contact</h1>
+        <p class="tagline"> Tell us what you need.</p>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" >Contact</a>
+        </nav>
+    </header>
+
+    <main id="main-content" class="container">
+
+        <section class="intro-card" >
+            <h2 id="contact-heading">Contact Us</h2>
+            <p>Complete this form to share a question or message.</p>
+        </section>
+
+        <section class="form-panel" >
+            <h2 id="form-heading">Contact Form</h2>
+
+            <div class="alert alert-info" role="note">
+                Fields marked with
+                <span aria-hidden="true">*</span>
+                are required.
+            </div>
+
+            <form action="#" method="post">
+
+                <div class="form-field">
+                    <label for="fullName">
+                        Name <span aria-hidden="true">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="emailAddress">
+                        Email <span aria-hidden="true">*</span>
+                    </label>
+
+                    <input
+                        type="email"
+                        id="emailAddress"
+                        name="emailAddress"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="studentId">Student ID Number</label>
+
+                    <input
+                        type="number"
+                        id="studentId"
+                        name="studentId"
+                        inputmode="numeric"
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="visitDate">Date of Visit</label>
+
+                    <input
+                        type="date"
+                        id="visitDate"
+                        name="visitDate"
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="inquiryType">Type of Inquiry</label>
+
+                    <select id="inquiryType" name="inquiryType">
+                        <option value="general">General Question</option>
+                        <option value="feedback">Feedback</option>
+                    </select>
+                </div>
+
+                <fieldset class="choice-group">
+                    <legend>Are you a student?</legend>
+
+                    <div class="choice-option">
+                        <input
+                            type="radio"
+                            id="studentYes"
+                            name="isStudent"
+                            value="yes"
+                        >
+                        <label for="studentYes">Yes</label>
+                    </div>
+
+                    <div class="choice-option">
+                        <input
+                            type="radio"
+                            id="studentNo"
+                            name="isStudent"
+                            value="no"
+                        >
+                        <label for="studentNo">No</label>
+                    </div>
+                </fieldset>
+
+                <fieldset class="choice-group">
+                    <legend>How did you hear about us?</legend>
+
+                    <div class="choice-option">
+                        <input
+                            type="checkbox"
+                            id="socialMedia"
+                            name="source"
+                            value="social"
+                        >
+                        <label for="socialMedia">Social Media</label>
+                    </div>
+
+                    <div class="choice-option">
+                        <input
+                            type="checkbox"
+                            id="friend"
+                            name="source"
+                            value="friend"
+                        >
+                        <label for="friend">Friend</label>
+                    </div>
+                </fieldset>
+
+                <div class="form-field">
+                    <label for="message">Message</label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                    ></textarea>
+                </div>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 My Page </p>
+    </footer>
+</body>
+</html>

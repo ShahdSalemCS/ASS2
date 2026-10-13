@@ -1,0 +1,531 @@
+/* 1. Global settings and theme variables */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: light dark;
+
+    --page-bg: #faf6f0;
+    --surface: #ffffff;
+    --text: #24151e;
+    --muted-text: #51434b;
+
+    --brand: #4b1e35;
+    --brand-hover: #351326;
+    --header-bg: #2a021a;
+
+    --border: #b8aab1;
+    --focus: #005fcc;
+
+    --success-bg: #e8f5eb;
+    --success-text: #174d2a;
+
+    --warning-bg: #fff1cf;
+    --warning-text: #664500;
+
+    --info-bg: #e8f2ff;
+    --info-text: #173d68;
+
+    --shadow: 0 8px 24px rgb(35 2 25 / 12%);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    background: var(--page-bg);
+    color: var(--text);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: var(--brand);
+    text-underline-offset: 0.18em;
+}
+
+a:hover {
+    text-decoration-thickness: 2px;
+}
+
+
+/* Accessibility: visible keyboard focus */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.table-wrapper:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+}
+
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -5rem;
+    z-index: 100;
+
+    padding: 0.7rem 1rem;
+
+    background: var(--surface);
+    color: var(--text);
+
+    border: 2px solid currentColor;
+    border-radius: 0.4rem;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+
+/* 2. Header and navigation */
+
+.site-header {
+    background: var(--header-bg);
+    color: #ffffff;
+    text-align: center;
+    padding: 1.5rem 1rem;
+}
+
+.site-header h1 {
+    margin: 0;
+    line-height: 1.2;
+}
+
+.tagline {
+    margin: 0.5rem 0 1rem;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+}
+
+nav a {
+    color: #ffffff;
+    font-weight: 700;
+    padding: 0.25rem 0.1rem;
+}
+
+nav a[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+}
+
+
+/* 3. Shared page layout and boxed sections */
+
+.container {
+    width: min(100% - 2rem, 1100px);
+    margin-inline: auto;
+    padding-block: 1.5rem 2rem;
+}
+
+section {
+    margin-block: 0 2rem;
+}
+
+h2,
+h3 {
+    line-height: 1.25;
+}
+
+.intro-card,
+.panel,
+.card,
+.form-panel {
+    background: var(--surface);
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: 0.85rem;
+
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+}
+
+.intro-card h2,
+.card h3 {
+    margin-top: 0;
+}
+
+
+/* Mobile first: one column */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+}
+
+.card {
+    box-shadow: none;
+    min-width: 0;
+}
+
+.card p {
+    margin-bottom: 0;
+}
+
+
+/* 4. Reusable links and buttons */
+
+.button-link,
+button {
+    display: inline-block;
+
+    border: 2px solid var(--brand);
+    border-radius: 0.45rem;
+
+    background: var(--brand);
+    color: #ffffff;
+
+    font: inherit;
+    font-weight: 700;
+    line-height: 1.3;
+
+    padding: 0.7rem 1rem;
+
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.button-link:hover,
+button:hover {
+    background: var(--brand-hover);
+    border-color: var(--brand-hover);
+    color: #ffffff;
+}
+
+
+/* 5. Form fields and labels */
+
+.form-panel {
+    max-width: 760px;
+    margin-inline: auto;
+}
+
+.form-field {
+    margin-block: 0 1rem;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 700;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+    display: block;
+    width: 100%;
+    min-height: 2.75rem;
+
+    padding: 0.65rem 0.75rem;
+
+    border: 1px solid #766670;
+    border-radius: 0.4rem;
+
+    background: var(--surface);
+    color: var(--text);
+
+    font: inherit;
+}
+
+textarea {
+    resize: vertical;
+}
+
+
+/* Radio buttons and checkboxes */
+
+.choice-group {
+    margin: 0 0 1rem;
+    padding: 0.8rem 1rem 0.6rem;
+
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+}
+
+.choice-group legend {
+    font-weight: 700;
+    padding-inline: 0.25rem;
+}
+
+.choice-option {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-block: 0.4rem;
+}
+
+.choice-option input {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--brand);
+}
+
+.choice-option label {
+    display: inline;
+    margin: 0;
+    font-weight: 400;
+}
+
+
+/* 6. Alert / Notification components */
+
+.alert {
+    padding: 0.85rem 1rem;
+    margin-block: 1rem;
+
+    border: 1px solid currentColor;
+    border-left-width: 5px;
+    border-radius: 0.45rem;
+}
+
+.alert-success {
+    background: var(--success-bg);
+    color: var(--success-text);
+}
+
+.alert-warning {
+    background: var(--warning-bg);
+    color: var(--warning-text);
+}
+
+.alert-info {
+    background: var(--info-bg);
+    color: var(--info-text);
+}
+
+
+/* 7. Tables */
+
+.table-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+}
+
+table {
+    width: 100%;
+    min-width: 560px;
+
+    border-collapse: collapse;
+
+    background: var(--surface);
+    color: var(--text);
+}
+
+caption {
+    padding: 0.8rem;
+    font-weight: 700;
+    text-align: left;
+    color: var(--text);
+}
+
+th,
+td {
+    padding: 0.8rem;
+
+    border: 1px solid var(--border);
+
+    text-align: left;
+    vertical-align: top;
+}
+
+thead th {
+    background: var(--brand);
+    color: #ffffff;
+}
+
+tbody th {
+    font-weight: 700;
+}
+
+tbody tr:nth-child(even) {
+    background: color-mix(
+        in srgb,
+        var(--surface) 90%,
+        var(--border)
+    );
+}
+
+
+/* 8. CSS-only Modal */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 1rem;
+    background: rgb(0 0 0 / 70%);
+}
+
+/* The modal appears when its ID is targeted by the URL */
+
+.modal:target {
+    display: flex;
+}
+
+.modal__content {
+    width: min(100%, 520px);
+    max-height: 90vh;
+    overflow: auto;
+
+    padding: 1.5rem;
+
+    background: var(--surface);
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: 0.85rem;
+
+    box-shadow: var(--shadow);
+}
+
+.modal-launch {
+    margin-bottom: 0;
+}
+
+
+/* 9. Footer */
+
+.site-footer {
+    background: var(--header-bg);
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+
+/* 10. Tablet: two columns from 768px */
+
+@media (min-width: 768px) {
+    .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .container {
+        padding-block: 2rem 3rem;
+    }
+}
+
+
+/* 11. Laptop/Desktop: three columns from 1024px */
+
+@media (min-width: 1024px) {
+    .card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+/* 12. Dark Mode: follow system preference */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --page-bg: #171217;
+        --surface: #251d25;
+        --text: #f7eff5;
+        --muted-text: #d5c8d1;
+
+        --brand: #f0cce0;
+        --brand-hover: #ffffff;
+        --header-bg: #10070f;
+
+        --border: #776575;
+        --focus: #8fc7ff;
+
+        --success-bg: #173321;
+        --success-text: #d8f7df;
+
+        --warning-bg: #3b2d0c;
+        --warning-text: #ffedb3;
+
+        --info-bg: #172b42;
+        --info-text: #d9eaff;
+
+        --shadow: 0 8px 24px rgb(0 0 0 / 28%);
+    }
+
+    a {
+        color: #f0cce0;
+    }
+
+    .button-link,
+    button {
+        background: #f0cce0;
+        border-color: #f0cce0;
+        color: #24151e;
+    }
+
+    .button-link:hover,
+    button:hover {
+        background: #ffffff;
+        border-color: #ffffff;
+        color: #24151e;
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]),
+    select,
+    textarea {
+        border-color: #9b8997;
+    }
+
+    .choice-option input {
+        accent-color: #f0cce0;
+    }
+
+    thead th {
+        background: #f0cce0;
+        color: #24151e;
+    }
+}
+
+
+/* 13. Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
