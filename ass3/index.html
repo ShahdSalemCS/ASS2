@@ -9,9 +9,9 @@
     --bg: #eef3f1;
     --panel: #ffffff;
     --ink: #17302b;
-    --muted: #5b716c;
-    --line: #c5d3cf;
-    --accent: #0f6b5c;
+    --muted: #30041c;
+    --line: #450421;
+    --accent: #370127;
     --head: #dfeae6;
   }
   * { box-sizing: border-box; }
@@ -90,7 +90,12 @@
   // Add the users who registered in register.html (saved in this browser).
   try {
     const saved = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
-    saved.forEach(u => people.push({ name: u.name, email: u.email, age: u.age, city: "—" }));
+   saved.forEach(u => people.push({
+  name: u.name,
+  email: u.email,
+  age: u.age,
+  city: u.city || "—"
+}));
   } catch (e) {
     // If storage is unavailable, just show the sample data.
   }

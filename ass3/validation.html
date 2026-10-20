@@ -8,12 +8,12 @@
   :root {
     --bg: #eef3f1;
     --panel: #ffffff;
-    --ink: #17302b;
-    --muted: #5b716c;
+    --ink: #301723;
+    --muted: #400821;
     --line: #c5d3cf;
-    --accent: #0f6b5c;
+    --accent: #3b0325;
     --error: #b3261e;
-    --ok: #1b7a43;
+    --ok: #4c031f;
   }
   * { box-sizing: border-box; }
   body {
@@ -61,7 +61,7 @@
     border-radius: 4px;
     cursor: pointer;
   }
-  button:hover { background: #0b5448; }
+  button:hover { background: #300120; }
   button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   #success { margin: 14px 0 0; color: var(--ok); font-weight: bold; text-align: center; }
 </style>
@@ -73,13 +73,13 @@
 
     <div class="field">
       <label for="name">Name</label>
-      <input type="text" id="name" autocomplete="name">
+      <input type="text" id="name" autocomplete="name" placeholder="like shahd salem">
       <p class="error" id="nameError"></p>
     </div>
 
     <div class="field">
       <label for="email">Email</label>
-      <input type="text" id="email" autocomplete="email">
+      <input type="text" id="email" autocomplete="email" placeholder="like shahd@gmail.com">
       <p class="error" id="emailError"></p>
     </div>
 
@@ -101,6 +101,12 @@
       <p class="error" id="ageError"></p>
     </div>
 
+    <div class="field">
+  <label for="city">City</label>
+  <input type="text" id="city">
+  <p class="error" id="cityError"></p>
+</div>
+
     <button type="submit">Register</button>
     <p id="success" role="status"></p>
   </form>
@@ -111,12 +117,17 @@
 
   // Each validator returns an error message, or "" if the value is fine.
   const validators = {
-    name(v) {
-      v = v.trim();
-      if (v === "") return "Name is required.";
-      if (v.length < 2) return "Name must be at least 2 characters.";
-      return "";
-    },
+  name(v) {
+  v = v.trim();
+
+  if (v === "") return "Name is required.";
+  if (v.length < 2) return "Name must be at least 2 characters.";
+  if (!/^[a-zA-Z\s]+$/.test(v)) {
+    return "Name must contain letters only.";
+  }
+
+  return "";
+},
     email(v) {
       v = v.trim();
       if (v === "") return "Email is required.";
@@ -183,7 +194,8 @@
     const user = {
       name: document.getElementById("name").value.trim(),
       email: document.getElementById("email").value.trim().toLowerCase(),
-      age: Number(document.getElementById("age").value.trim())
+      age: Number(document.getElementById("age").value.trim()),
+      city: document.getElementById("city").value.trim()
     };
 
     try {

@@ -1,13 +1,12 @@
 // بنجيب الفورم من الصفحة
 const form = document.getElementById("regForm");
-
-// دالة بتعرض رسالة الخطأ تحت الحقل (أو تمسحها لو الرسالة فاضية)
+// رسالة الخطأ  لو المدخلات فاضية
 function setError(id, message) {
   document.getElementById(id + "Error").textContent = message;
   document.getElementById(id).classList.toggle("invalid", message !== "");
 }
 
-// الكود ده بيشتغل لما المستخدم يدوس Sign up
+//الكود ده بيشتغل عند Sign up
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // يمنع إرسال الفورم/إعادة تحميل الصفحة
 
@@ -17,19 +16,26 @@ form.addEventListener("submit", function (event) {
   const password = document.getElementById("password").value;
   const confirm = document.getElementById("confirm").value;
   const age = document.getElementById("age").value;
+  const city = document.getElementById("city").value.trim();
 
   let valid = true; // نفترض إن كله صح، ولو لقينا غلط نخليها false
 
   // الاسم
-  if (name === "") {
-    setError("name", "Name is required.");
-    valid = false;
-  } else {
-    setError("name", "");
-  }
+// الاسم: مطلوب وحروف إنجليزية فقط
+const namePattern = /^[a-zA-Z\s]+$/;
 
-  // الإيميل: pattern بسيط = حاجة@حاجة.حاجة
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (name === "") {
+  setError("name", "Name is required.");
+  valid = false;
+} else if (!namePattern.test(name)) {
+  setError("name", "Name must contain letters only.");
+  valid = false;
+} else {
+  setError("name", "");
+}
+
+  // الإيميل: pattern  = حاجة@حاجة.حاجة
+ const emailPattern = /^[^\s@]+@[^\s@]+**\\.**[^\s@]+$/;
   if (!emailPattern.test(email)) {
     setError("email", "Enter a valid email like name@example.com.");
     valid = false;
@@ -62,6 +68,40 @@ form.addEventListener("submit", function (event) {
     setError("age", "");
   }
 
-  // لو كله صح نعرض رسالة نجاح، لو لأ نمسحها
-  document.getElementById("success").textContent = valid ? "Registration successful!" : "";
+  // المدينة: مطلوبة
+if (city === "") {
+  setError("city", "City is required.");
+  valid = false;
+} else {
+  setError("city", "");
+}
+
+  // لو فيه خطأ، نمسح رسالة النجاح ونوقف التسجيل
+const success = document.getElementById("success");
+success.textContent = "";
+
+if (!valid) return;
+
+// تجهيز بيانات المستخدم
+const user = {
+  name: name,
+  email: email.toLowerCase(),
+  age: ageNumber,
+  city: city
+};
+
+// حفظ البيانات
+const users = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
+
+// منع تكرار الإيميل
+if (users.some(u => u.email === user.email)) {
+  setError("email", "This email is already registered.");
+  return;
+}
+
+users.push(user);
+localStorage.setItem("registeredUsers", JSON.stringify(users));
+
+success.textContent = "Registration successful!";
+form.reset();
 });
